@@ -6,7 +6,7 @@ import {Button} from 'primeng/button';
 import {MenuItem} from 'primeng/api';
 import {ColorSwitcherComponent} from '../color-switcher/color-switcher.component';
 import {Ripple} from 'primeng/ripple';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {filter} from 'rxjs';
 import {TitleCasePipe, UpperCasePipe} from '@angular/common';
 import {SidenavComponent} from '../sidenav/sidenav.component';
@@ -21,7 +21,8 @@ import {SidenavComponent} from '../sidenav/sidenav.component';
     ColorSwitcherComponent,
     Ripple,
     TitleCasePipe,
-    SidenavComponent
+    SidenavComponent,
+    RouterOutlet
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
