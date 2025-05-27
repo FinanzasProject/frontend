@@ -1,0 +1,29 @@
+<p-toolbar>
+  <ng-template #start>
+    <div class="flex items-center gap-3">
+      <p-button icon="pi pi-align-justify" (click)="visible = true"></p-button>
+      <h1 class="text-2xl font-bold">{{title | titlecase }}</h1>
+    </div>
+  </ng-template>
+  <ng-template #end>
+    <div class="flex items-center gap-1 ">
+      <div class="flex flex-row items-center gap-2">
+        <app-color-switcher class="mt-1"></app-color-switcher>
+        <i class="pi pi-bell cursor-pointer" style="font-size: 1.2rem"></i>
+      </div>
+      <div>
+        <p-avatar label="P" shape="circle" size="large" class="mx-2" ></p-avatar>
+        <p-menu #menu  [model]="items" [popup]="true">
+          <ng-template #item let-item>
+            <a pRipple class="flex items-center p-menu-item-link" >
+              <span [class]="item.icon"></span>
+              <span class="ml-2">{{ item.label }}</span>
+            </a>
+          </ng-template>
+        </p-menu>
+        <p-button (click)="menu.toggle($event)" icon="pi pi-angle-down"/>
+      </div>
+    </div>
+  </ng-template>
+</p-toolbar>
+<app-sidenav [visible]="visible" (visibleChange)="hideSidebar()"></app-sidenav>

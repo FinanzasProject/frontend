@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeflex/primeflex.css";
+@import "primeicons/primeicons.css";
+
+@tailwind utilities;
+@plugin "tailwindcss-primeui";
+@custom-variant dark (&:where(.p-dark, .p-dark *));
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
