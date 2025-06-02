@@ -3,10 +3,14 @@ import {DashboardViewComponent} from './BondSimulatorModule/pages/dashboard-view
 import {
   SimulateCashFlowViewComponent
 } from './BondSimulatorModule/pages/simulate-cash-flow-view/simulate-cash-flow-view.component';
+import {
+  HistoricalBondViewComponent
+} from './BondSimulatorModule/pages/historical-bond-view/historical-bond-view.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: DashboardViewComponent },
   { path: 'simulate', component: SimulateCashFlowViewComponent },
+  {path: 'historical-bond', component: HistoricalBondViewComponent },
 ];
 

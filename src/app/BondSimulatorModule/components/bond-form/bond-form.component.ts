@@ -3,7 +3,6 @@ import {
   AbstractControl,
   FormBuilder,
   FormControl,
-  FormGroup,
   ReactiveFormsModule,
   ValidationErrors,
   Validators
@@ -11,6 +10,12 @@ import {
 import {InputText} from 'primeng/inputtext';
 import {Select} from 'primeng/select';
 import {DatePicker} from 'primeng/datepicker';
+import {ButtonGroup} from 'primeng/buttongroup';
+import {Button} from 'primeng/button';
+import {InputNumber} from 'primeng/inputnumber';
+import {Tooltip} from 'primeng/tooltip';
+import {Ripple} from 'primeng/ripple';
+import { StyleClassModule} from 'primeng/styleclass';
 
 @Component({
   selector: 'app-bond-form',
@@ -18,30 +23,40 @@ import {DatePicker} from 'primeng/datepicker';
     ReactiveFormsModule,
     InputText,
     Select,
-    DatePicker
+    DatePicker,
+    ButtonGroup,
+    Button,
+    InputNumber,
+    Tooltip,
+    Ripple,
+    StyleClassModule
   ],
   templateUrl: './bond-form.component.html',
+  standalone: true,
   styleUrl: './bond-form.component.css'
 })
 export class BondFormComponent implements OnInit {
   rateType: any[] | undefined;
   paymentFrequency : any[] | undefined;
   amortization_method: any[] | undefined;
+  capitalizationOptions : any[] | undefined;
   private formBuilder= inject(FormBuilder);
   bondForm = this.formBuilder.group({
-    name: new FormControl('', [Validators.required,Validators.maxLength(50), Validators.minLength(3),Validators.maxLength(20)]),
-    nominal_amount: new FormControl(0, [Validators.required, Validators.min(1)]),
-    interest_rate: new FormControl(0, [Validators.required,Validators.min(0)]) ,
+    name: new FormControl('', [Validators.required,Validators.maxLength(50), Validators.minLength(3),Validators.maxLength(50)]),
+    nominal_amount: new FormControl(null, [Validators.required, Validators.min(1)]),
+    interest_rate: new FormControl(null, [Validators.required,Validators.min(0)]) ,
     rate_type: new FormControl('', ),
-    payment_frequency: new FormControl(''),
+    capitalization_period: new FormControl('', ),
+    payment_frequency: new FormControl('',Validators.required),
     amortization_method: new FormControl(''),
-    term: new FormControl(0, [Validators.required,Validators.min(1)]),
-    total_grace: new FormControl(0,[Validators.required,Validators.min(1)]),
-    partial_grace: new FormControl(0,[Validators.required,Validators.min(1)]),
-    initial_cost: new FormControl('', [Validators.required,Validators.min(1)]),
-    issue_date: new FormControl(''),
+    term: new FormControl(null, [Validators.min(1)]),
+    issue_date: new FormControl(null, Validators.required),
+    total_grace: new FormControl(null,[Validators.min(0)]),
+    partial_grace: new FormControl(null,[Validators.min(0)]),
+    initial_cost: new FormControl(null, [Validators.min(0)]),
   },{
     validators: [this.partialGraceValidator],
+
   })
   constructor() {
   }
@@ -51,19 +66,22 @@ export class BondFormComponent implements OnInit {
       {name: 'effective'},
     ]
     this.paymentFrequency = [
-      {name:'daily'},
-      {name:'weekly'},
       {name:'monthly'},
       {name:'bimonthly'},
       {name:'quarterly'},
       {name:'semiannual'},
       {name:'annual'},
-      {name:'bullet'},
     ]
     this.amortization_method = [
       {name:'french'},
     ]
-
+    this.capitalizationOptions = [
+      {name:'monthly'},
+      {name:'bimonthly'},
+      {name:'quarterly'},
+      {name:'semiannual'},
+      {name:'annual'},
+    ]
   }
 
   private partialGraceValidator(control:AbstractControl):ValidationErrors | null {
@@ -74,6 +92,9 @@ export class BondFormComponent implements OnInit {
       return {partialGreaterThanTotal: true}
     }
     return null;
+  }
+  resetForm(): void {
+    this.bondForm.reset();
   }
 
 }

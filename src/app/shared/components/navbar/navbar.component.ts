@@ -6,9 +6,9 @@ import {Button} from 'primeng/button';
 import {MenuItem} from 'primeng/api';
 import {ColorSwitcherComponent} from '../color-switcher/color-switcher.component';
 import {Ripple} from 'primeng/ripple';
-import {ActivatedRoute, NavigationEnd, Router, RouterOutlet} from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {filter} from 'rxjs';
-import {TitleCasePipe, UpperCasePipe} from '@angular/common';
+import {TitleCasePipe} from '@angular/common';
 import {SidenavComponent} from '../sidenav/sidenav.component';
 
 @Component({

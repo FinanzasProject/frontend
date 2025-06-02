@@ -1,104 +1,250 @@
-<form [formGroup]="bondForm" class="flex flex-col gap-3 md:flex-row ">
+<form [formGroup]="bondForm" class="flex flex-col gap-3 md:flex-row h-[500px]">
   <div class="flex flex-column gap-3 w-full md:w-1/2">
+
+    <!--Name -->
     <div class="flex flex-col gap-2 ">
-      <label class="font-bold" for="name">Name</label>
-      <input pInputText id="name" type="text" formControlName="name" placeholder="name" required>
-      @if (!bondForm.controls.name.valid && (bondForm.controls.name.dirty || bondForm.controls.name.touched)){
-        @if (bondForm.controls.name.hasError('required') ) {
+      <div class="flex flex-row gap-1">
+        <label class="font-bold" for="name">Name</label>
+        <i class="pi pi-question-circle" style="color: #708090" title="Name for the bond"></i>
+      </div>
+      <input pInputText pTooltip="Label or identifier for easy reference of the bond." tooltipPosition="left" id="name"
+             type="text" formControlName="name" placeholder="Name" required>
+      @if (!bondForm.controls.name.valid && (bondForm.controls.name.dirty || bondForm.controls.name.touched)) {
+        @if (bondForm.controls.name.hasError('required')) {
           <small class="text-red-600">Bono name is required</small>
         } @else if (bondForm.controls.name.hasError('minlength')) {
           <small class="text-red-600">Bono name should be more than 1 character</small>
-        } @else if (bondForm.controls.name.hasError('maxlength')){
-          <small class="text-red-600"> Bono name should be minor than 15 characters </small>
+        } @else if (bondForm.controls.name.hasError('maxlength')) {
+          <small class="text-red-600"> Bono name should be minor than 50 characters </small>
         }
       }
     </div>
+
+    <!--Nominal Amount -->
     <div class="flex flex-col gap-2  ">
-      <label class="font-bold" for="nominal_amount">Nominal Amount</label>
-      <input pInputText id="nominal_amount" type="number" formControlName="nominal_amount" placeholder="Nominal Amount" required>
-      @if (!bondForm.controls.nominal_amount.valid && (bondForm.controls.nominal_amount.dirty || bondForm.controls.nominal_amount.touched)){
-        @if (bondForm.controls.nominal_amount.hasError('required') ) {
+      <div class="flex flex-row gap-1">
+        <label class="font-bold" for="nominal_amount">Nominal Amount</label>
+        <i class="pi pi-question-circle" style="color: #708090" title="Initial principal amount to be amortized."></i>
+      </div>
+      <p-input-number pTooltip="Initial principal amount to be amortized." tooltipPosition="left" id="nominal_amount"
+                      type="number" formControlName="nominal_amount" placeholder="Nominal Amount"
+                      required></p-input-number>
+      @if (!bondForm.controls.nominal_amount.valid && (bondForm.controls.nominal_amount.dirty || bondForm.controls.nominal_amount.touched)) {
+        @if (bondForm.controls.nominal_amount.hasError('required')) {
           <small class="text-red-600">Nominal Amount required.</small>
         } @else if (bondForm.controls.nominal_amount.hasError('min')) {
           <small class="text-red-600">Nominal Amount should be more than zero</small>
         }
       }
     </div>
+
+    <!--Rate Type -->
+    <div class="flex flex-col gap-2 ">
+      <div class="flex flex-row gap-1">
+        <label class="font-bold" for="rate_type">Rate Type</label>
+        <i class="pi pi-question-circle" style="color: #708090"
+           title="Specifies if the rate is nominal or effective and how it’s converted."></i>
+      </div>
+      <p-select pTooltip="Specifies if the rate is nominal or effective and how it’s converted." tooltipPosition="left"
+                id="rate_type" formControlName="rate_type" [options]="rateType" optionLabel="name"
+                placeholder="Select a Rate"/>
+    </div>
+
+    <!-- Capitalization Period -->
+    <div class="flex flex-col gap-2 "
+    >
+      <div class="flex flex-row gap-1">
+        <label class="font-bold" for="capitalization_period">
+          Capitalization Period
+        </label>
+        <i class="pi pi-question-circle" style="color: #708090"
+           title="How often the rate is capitalized (for example: monthly, quarterly, etc.).">
+        </i>
+      </div>
+      <p-select
+        pTooltip="How often the rate is capitalized (for example: monthly, quarterly, etc.)."
+        tooltipPosition="left"
+        id="capitalization_period"
+        formControlName="capitalization_period"
+        [options]="capitalizationOptions"
+        optionLabel="name"
+        placeholder="Select Period"
+      >
+      </p-select>
+    </div>
+
+    <!--Interest Rate-->
     <div class="flex flex-col gap-2  ">
-      <label class="font-bold" for="interest_rate">Interest Rate</label>
-      <input pInputText id="interest_rate" type="number" formControlName="interest_rate" placeholder="Interest Rate" required>
-      @if (!bondForm.controls.interest_rate.valid && (bondForm.controls.interest_rate.dirty || bondForm.controls.interest_rate.touched)){
-        @if (bondForm.controls.interest_rate.hasError('required') ) {
+      <div class="flex flex-row gap-1">
+        <label class="font-bold" for="interest_rate">Interest Rate</label>
+        <i class="pi pi-question-circle" style="color: #708090" title="Annual rate used to calculate each payment."></i>
+      </div>
+      <p-input-number pTooltip="Annual rate used to calculate each payment." tooltipPosition="left"
+                      [minFractionDigits]="2" [maxFractionDigits]="5" mode="decimal" id="interest_rate" type="number"
+                      formControlName="interest_rate" placeholder="Interest Rate" required/>
+      @if (!bondForm.controls.interest_rate.valid && (bondForm.controls.interest_rate.dirty || bondForm.controls.interest_rate.touched)) {
+        @if (bondForm.controls.interest_rate.hasError('required')) {
           <small class="text-red-600">Interest Rate is required</small>
         } @else if (bondForm.controls.interest_rate.hasError('min')) {
           <small class="text-red-600">Interest rate shouldn't be negative </small>
         }
       }
     </div>
+
+
+
+    <!--Amortization Method -->
     <div class="flex flex-col gap-2 ">
-      <label class="font-bold" for="interest_rate">Rate Type</label>
-      <p-select formControlName="rate_type" [options]="rateType" optionLabel="name" placeholder="Select a Rate" />
+      <div class="flex flex-row gap-1">
+        <label class="font-bold" for="amortization_method">Amortizaton Method</label>
+        <i class="pi pi-question-circle" style="color: #708090"
+           title="Scheme used to distribute payments (e.g., French)."></i>
+      </div>
+      <p-select pTooltip="Scheme used to distribute payments (e.g., French)." tooltipPosition="left"
+                id="amortization_method" formControlName="amortization_method" [options]="amortization_method"
+                optionLabel="name" placeholder="Select Amortization"/>
     </div>
+
+    <!--Payment Frequency -->
     <div class="flex flex-col gap-2 ">
-      <label class="font-bold" for="interest_rate">Amortization Method</label>
-      <p-select formControlName="amortization_method" [options]="amortization_method" optionLabel="name" placeholder="Select Amortization" />
+      <div class="flex flex-row gap-1">
+        <label class="font-bold" for="payment_frequency">Payment Frequency</label>
+        <i class="pi pi-question-circle" style="color: #708090" title="Number of payment periods per year."></i>
+      </div>
+      <p-select pTooltip="Number of payment periods per year." tooltipPosition="left" id="payment_frequency"
+                formControlName="payment_frequency" [options]="paymentFrequency" optionLabel="name"
+                placeholder="Select Payment Frequency"/>
+      @if (!bondForm.controls.payment_frequency.valid && (bondForm.controls.payment_frequency.dirty || bondForm.controls.payment_frequency.touched)) {
+        @if (bondForm.controls.payment_frequency.hasError('required')) {
+          <small class="text-red-600">Interest Rate is required</small>
+        }
+      }
     </div>
 
   </div>
+
+
   <div class="flex flex-column gap-3 w-full md:w-1/2">
+    <!--Term  -->
     <div class="flex flex-col gap-2 ">
-      <label class="font-bold" for="name">Term</label>
-      <input pInputText id="name" type="text" formControlName="term" placeholder="term" required>
-      @if (!bondForm.controls.term.valid && (bondForm.controls.term.dirty || bondForm.controls.term.touched)){
-        @if (bondForm.controls.term.hasError('required') ) {
+      <div class="flex flex-row gap-1">
+        <label class="font-bold" for="term">Term</label>
+        <i class="pi pi-question-circle" style="color: #708090"
+           title="Total number of payment periods (installments)."></i>
+      </div>
+      <input pInputText pTooltip="Total number of payment periods (installments)." tooltipPosition="right" id="term"
+             type="number" formControlName="term" placeholder="Term" required>
+      @if (!bondForm.controls.term.valid && (bondForm.controls.term.dirty || bondForm.controls.term.touched)) {
+        @if (bondForm.controls.term.hasError('required')) {
           <small class="text-red-600">Term is required</small>
         } @else if (bondForm.controls.term.hasError('min')) {
           <small class="text-red-600">Term should be more than 0</small>
         }
       }
     </div>
-    <div class="flex flex-col gap-2  ">
-      <label class="font-bold" for="total_grace">Total Grace</label>
-      <input pInputText id="total_grace" type="number" formControlName="total_grace" placeholder="Total Grace" required>
-      @if (!bondForm.controls.total_grace.valid && (bondForm.controls.total_grace.dirty || bondForm.controls.total_grace.touched)){
-        @if (bondForm.controls.total_grace.hasError('required') ) {
-          <small class="text-red-600">Total Grace is required.</small>
-        } @else if (bondForm.controls.total_grace.hasError('min')) {
-          <small class="text-red-600">Total Grace should be more than zero</small>
+
+    <!--Issue Date  -->
+    <div class="flex flex-col gap-2 pb-2">
+      <div class="flex flex-row gap-1">
+        <label class="font-bold" for="issue_date">Issue Date</label>
+        <i class="pi pi-question-circle" style="color: #708090"
+           title="Date when the bond is issued and payment schedule starts."></i>
+      </div>
+      <p-date-picker id="issue_date" pTooltip="Date when the bond is issued and payment schedule starts."
+                     tooltipPosition="right" [style]="{ 'width': '100%' }" formControlName="issue_date"
+                     placeholder="dd/mm/yy"
+                     [iconDisplay]="'input'"
+                     [showIcon]="true" inputId="issue_date" [readonlyInput]="true"/>
+      @if (!bondForm.controls.issue_date.valid && (bondForm.controls.issue_date.dirty || bondForm.controls.issue_date.touched)) {
+        @if (bondForm.controls.issue_date.hasError('required')) {
+          <small class="text-red-600">Interest Rate is required</small>
         }
       }
     </div>
-    <div class="flex flex-col gap-2  ">
-      <label class="font-bold" for="partial_grace">Partial Grace</label>
-      <input pInputText id="partial_grace" type="number" formControlName="partial_grace" placeholder="Partial Grace" required>
-      @if (!bondForm.controls.partial_grace.valid && (bondForm.controls.partial_grace.dirty || bondForm.controls.partial_grace.touched)){
-        @if (bondForm.controls.partial_grace.hasError('required') ) {
-          <small class="text-red-600">Partial Grace is required</small>
-        } @else if (bondForm.controls.partial_grace.hasError('min')) {
-          <small class="text-red-600">Partial Grace shouldn't be negative </small>
-        }
-      }
-      @if (bondForm.hasError('partialGreaterThanTotal')){
-        <small class="text-red-600">Partial grace cannot exceed total grace. </small>
-      }
+
+    <div
+      pRipple
+      pStyleClass="@next"
+      enterFromClass="hidden"
+      enterActiveClass="animate-slidedown"
+      leaveToClass="hidden"
+      leaveActiveClass="animate-slideup"
+      class="flex gap-1 cursor-pointer p-2 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple"
+    >
+      <span class="font-medium">Advanced Options</span>
+      <i class="pi pi-chevron-down"></i>
     </div>
-    <div class="flex flex-col gap-2 ">
-      <label class="font-bold" for="initial_cost">Initial Cost</label>
-      <input pInputText id="initial_cost" type="text" formControlName="initial_cost" placeholder="Initial Cost" required>
-      @if (!bondForm.controls.initial_cost.valid && (bondForm.controls.initial_cost.dirty || bondForm.controls.initial_cost.touched)){
-        @if (bondForm.controls.initial_cost.hasError('required') ) {
-          <small class="text-red-600">Initial Cost is required</small>
-        } @else if (bondForm.controls.initial_cost.hasError('min')) {
-          <small class="text-red-600">Initial Cost should be more than 0</small>
-        }
-      }
-    </div>
-    <div class="flex flex-col gap-2">
-      <label class="font-bold" for="issue_date">Issue Date</label>
-      <p-date-picker  formControlName="issue_date"  [iconDisplay]="'input'" [showIcon]="true" inputId="issue_date" [readonlyInput]="true" />
-    </div>
+    <ul class="hidden list-none p-0 m-0 overflow-hidden">
+      <li>
+        <div class="flex flex-col gap-2 pb-2 ">
+          <div class="flex flex-row gap-1">
+            <label class="font-bold" for="initial_cost">Initial Cost</label>
+            <i class="pi pi-question-circle" style="color: #708090"
+               title="Issue price of the bond (value or % of nominal)."></i>
+          </div>
+          <p-input-number pTooltip="Issue price of the bond (value or % of nominal)." tooltipPosition="right"
+                          id="initial_cost" type="number" formControlName="initial_cost" placeholder="Initial Cost"
+                          required/>
+          @if (!bondForm.controls.initial_cost.valid && (bondForm.controls.initial_cost.dirty || bondForm.controls.initial_cost.touched)) {
+            @if (bondForm.controls.initial_cost.hasError('min')) {
+              <small class="text-red-600">Initial Cost should be more than 0</small>
+            }
+          }
+        </div>
+      </li>
+      <li>
+        <div class="flex flex-col gap-2 pb-2">
+          <div class="flex flex-row gap-1">
+            <label class="font-bold" for="total_grace">Total Grace</label>
+            <i class="pi pi-question-circle" style="color: #708090"
+               title="Periods with no principal or interest payments."></i>
+          </div>
+          <input pInputText pTooltip="Periods with no principal or interest payments." tooltipPosition="right"
+                 id="total_grace" type="number" formControlName="total_grace" placeholder="Total Grace">
+          @if (!bondForm.controls.total_grace.valid && (bondForm.controls.total_grace.dirty || bondForm.controls.total_grace.touched)) {
+            @if (bondForm.controls.total_grace.hasError('required')) {
+              <small class="text-red-600">Total Grace is required.</small>
+            } @else if (bondForm.controls.total_grace.hasError('min')) {
+              <small class="text-red-600">Total Grace should be more than zero</small>
+            }
+          }
+        </div>
+      </li>
+      <li>
+        <div class="flex flex-col gap-2 pb-2 ">
+          <div class="flex flex-row gap-1">
+            <label class="font-bold" for="partial_grace">Partial Grace</label>
+            <i class="pi pi-question-circle" style="color: #708090" title="Periods with interest-only payments."></i>
+          </div>
+          <input pInputText pTooltip="Periods with interest-only payments." tooltipPosition="right" id="partial_grace"
+                 type="number" formControlName="partial_grace" placeholder="Partial Grace">
+          @if (!bondForm.controls.partial_grace.valid && (bondForm.controls.partial_grace.dirty || bondForm.controls.partial_grace.touched)) {
+            @if (bondForm.controls.partial_grace.hasError('required')) {
+              <small class="text-red-600">Partial Grace is required</small>
+            } @else if (bondForm.controls.partial_grace.hasError('min')) {
+              <small class="text-red-600">Partial Grace shouldn't be negative </small>
+            }
+          }
+          @if (bondForm.hasError('partialGreaterThanTotal')) {
+            <small class="text-red-600">Partial grace cannot exceed total grace. </small>
+          }
+        </div>
+      </li>
+
+
+    </ul>
 
 
   </div>
+
+
 </form>
-<div>Actions</div>
+
+
+<div class="flex justify-end p-5">
+  <p-button-group>
+    <p-button severity="danger" (onClick)="resetForm()"> Reset Form</p-button>
+    <p-button severity="success"> Save Bond</p-button>
+    <p-button severity="info"> Generate Cash Flow</p-button>
+  </p-button-group>
+</div>
