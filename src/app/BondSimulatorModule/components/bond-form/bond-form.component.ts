@@ -51,8 +51,8 @@ export class BondFormComponent implements OnInit {
     amortization_method: new FormControl(''),
     term: new FormControl(null, [Validators.min(1)]),
     issue_date: new FormControl(null, Validators.required),
-    total_grace: new FormControl(null,[Validators.min(0)]),
-    partial_grace: new FormControl(null,[Validators.min(0)]),
+    total_grace: new FormControl({value:null, disabled:true},[Validators.min(0)]),
+    partial_grace: new FormControl({value:null, disabled:true},[Validators.min(0)]),
     initial_cost: new FormControl(null, [Validators.min(0)]),
   },{
     validators: [this.partialGraceValidator],

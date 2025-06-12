@@ -12,7 +12,135 @@
       "term": 10,
       "total_grace": 1,
       "partial_grace": 2,
-      "initial_cost": 0
+      "initial_cost": 0,
+      "schedule": [
+        {
+          "period": 1,
+          "payment_date": "2025-06-15",
+          "starting_balance": 15000.00,
+          "interest": 0.00,
+          "principal": 0.00,
+          "total_payment": 0.00,
+          "ending_balance": 15000.00
+        },
+        {
+          "period": 2,
+          "payment_date": "2025-07-15",
+          "starting_balance": 15000.00,
+          "interest": 284.43,
+          "principal": 0.00,
+          "total_payment": 284.43,
+          "ending_balance": 15000.00
+        },
+        {
+          "period": 3,
+          "payment_date": "2025-08-15",
+          "starting_balance": 15000.00,
+          "interest": 284.43,
+          "principal": 0.00,
+          "total_payment": 284.43,
+          "ending_balance": 15000.00
+        },
+        {
+          "period": 4,
+          "payment_date": "2025-09-15",
+          "starting_balance": 15000.00,
+          "interest": 284.43,
+          "principal": 1364.84,
+          "total_payment": 1649.27,
+          "ending_balance": 13635.16
+        },
+        {
+          "period": 5,
+          "payment_date": "2025-10-15",
+          "starting_balance": 13635.16,
+          "interest": 258.70,
+          "principal": 1390.57,
+          "total_payment": 1649.27,
+          "ending_balance": 12244.59
+        },
+        {
+          "period": 6,
+          "payment_date": "2025-11-15",
+          "starting_balance": 12244.59,
+          "interest": 232.32,
+          "principal": 1416.95,
+          "total_payment": 1649.27,
+          "ending_balance": 10827.64
+        },
+        {
+          "period": 7,
+          "payment_date": "2025-12-15",
+          "starting_balance": 10827.64,
+          "interest": 205.65,
+          "principal": 1443.62,
+          "total_payment": 1649.27,
+          "ending_balance": 9384.02
+        },
+        {
+          "period": 8,
+          "payment_date": "2026-01-15",
+          "starting_balance": 9384.02,
+          "interest": 178.60,
+          "principal": 1470.67,
+          "total_payment": 1649.27,
+          "ending_balance": 7913.35
+        },
+        {
+          "period": 9,
+          "payment_date": "2026-02-15",
+          "starting_balance": 7913.35,
+          "interest": 150.88,
+          "principal": 1498.39,
+          "total_payment": 1649.27,
+          "ending_balance": 6414.96
+        },
+        {
+          "period": 10,
+          "payment_date": "2026-03-15",
+          "starting_balance": 6414.96,
+          "interest": 121.69,
+          "principal": 1527.58,
+          "total_payment": 1649.27,
+          "ending_balance": 4887.38
+        },
+        {
+          "period": 11,
+          "payment_date": "2026-04-15",
+          "starting_balance": 4887.38,
+          "interest": 92.26,
+          "principal": 1557.01,
+          "total_payment": 1649.27,
+          "ending_balance": 3330.37
+        },
+        {
+          "period": 12,
+          "payment_date": "2026-05-15",
+          "starting_balance": 3330.37,
+          "interest": 63.16,
+          "principal": 1586.11,
+          "total_payment": 1649.27,
+          "ending_balance": 1744.26
+        },
+        {
+          "period": 13,
+          "payment_date": "2026-06-15",
+          "starting_balance": 1744.26,
+          "interest": 33.06,
+          "principal": 1616.21,
+          "total_payment": 1649.27,
+          "ending_balance": 128.05
+        },
+        {
+          "period": 14,
+          "payment_date": "2026-07-15",
+          "starting_balance": 128.05,
+          "interest": 2.43,
+          "principal": 128.05,
+          "total_payment": 130.48,
+          "ending_balance": 0.00
+        }
+      ]
     },
     {
       "id": 2,
@@ -26,7 +154,63 @@
       "term": 6,
       "total_grace": 0,
       "partial_grace": 0,
-      "initial_cost": 0
+      "initial_cost": 0,
+      "schedule": [
+        {
+          "period": 1,
+          "payment_date": "2025-07-01",
+          "starting_balance": 10000.00,
+          "interest": 94.88,
+          "principal": 1628.39,
+          "total_payment": 1723.27,
+          "ending_balance": 8371.61
+        },
+        {
+          "period": 2,
+          "payment_date": "2025-08-01",
+          "starting_balance": 8371.61,
+          "interest": 79.47,
+          "principal": 1643.80,
+          "total_payment": 1723.27,
+          "ending_balance": 6727.81
+        },
+        {
+          "period": 3,
+          "payment_date": "2025-09-01",
+          "starting_balance": 6727.81,
+          "interest": 63.69,
+          "principal": 1659.58,
+          "total_payment": 1723.27,
+          "ending_balance": 5068.23
+        },
+        {
+          "period": 4,
+          "payment_date": "2025-10-01",
+          "starting_balance": 5068.23,
+          "interest": 48.07,
+          "principal": 1675.20,
+          "total_payment": 1723.27,
+          "ending_balance": 3393.03
+        },
+        {
+          "period": 5,
+          "payment_date": "2025-11-01",
+          "starting_balance": 3393.03,
+          "interest": 32.16,
+          "principal": 1691.11,
+          "total_payment": 1723.27,
+          "ending_balance": 1701.92
+        },
+        {
+          "period": 6,
+          "payment_date": "2025-12-01",
+          "starting_balance": 1701.92,
+          "interest": 16.14,
+          "principal": 1707.13,
+          "total_payment": 1723.27,
+          "ending_balance": 0.00
+        }
+      ]
     },
     {
       "id": 3,
@@ -40,7 +224,117 @@
       "term": 8,
       "total_grace": 2,
       "partial_grace": 1,
-      "initial_cost": 500
+      "initial_cost": 500,
+      "schedule": [
+        {
+          "period": 1,
+          "payment_date": "2025-10-10",
+          "starting_balance": 20000.00,
+          "interest": 0.00,
+          "principal": 0.00,
+          "total_payment": 0.00,
+          "ending_balance": 20000.00
+        },
+        {
+          "period": 2,
+          "payment_date": "2026-01-10",
+          "starting_balance": 20000.00,
+          "interest": 0.00,
+          "principal": 0.00,
+          "total_payment": 0.00,
+          "ending_balance": 20000.00
+        },
+        {
+          "period": 3,
+          "payment_date": "2026-04-10",
+          "starting_balance": 20000.00,
+          "interest": 900.00,
+          "principal": 0.00,
+          "total_payment": 900.00,
+          "ending_balance": 20000.00
+        },
+        {
+          "period": 4,
+          "payment_date": "2026-07-10",
+          "starting_balance": 20000.00,
+          "interest": 900.00,
+          "principal": 2130.30,
+          "total_payment": 3030.30,
+          "ending_balance": 17869.70
+        },
+        {
+          "period": 5,
+          "payment_date": "2026-10-10",
+          "starting_balance": 17869.70,
+          "interest": 804.14,
+          "principal": 2226.16,
+          "total_payment": 3030.30,
+          "ending_balance": 15643.54
+        },
+        {
+          "period": 6,
+          "payment_date": "2027-01-10",
+          "starting_balance": 15643.54,
+          "interest": 704.00,
+          "principal": 2326.30,
+          "total_payment": 3030.30,
+          "ending_balance": 13317.24
+        },
+        {
+          "period": 7,
+          "payment_date": "2027-04-10",
+          "starting_balance": 13317.24,
+          "interest": 599.27,
+          "principal": 2431.03,
+          "total_payment": 3030.30,
+          "ending_balance": 10886.21
+        },
+        {
+          "period": 8,
+          "payment_date": "2027-07-10",
+          "starting_balance": 10886.21,
+          "interest": 489.88,
+          "principal": 2540.42,
+          "total_payment": 3030.30,
+          "ending_balance": 8345.79
+        },
+        {
+          "period": 9,
+          "payment_date": "2027-10-10",
+          "starting_balance": 8345.79,
+          "interest": 375.56,
+          "principal": 2654.74,
+          "total_payment": 3030.30,
+          "ending_balance": 5691.05
+        },
+        {
+          "period": 10,
+          "payment_date": "2028-01-10",
+          "starting_balance": 5691.05,
+          "interest": 256.10,
+          "principal": 2774.20,
+          "total_payment": 3030.30,
+          "ending_balance": 2916.85
+        },
+        {
+          "period": 11,
+          "payment_date": "2028-04-10",
+          "starting_balance": 2916.85,
+          "interest": 131.26,
+          "principal": 2899.04,
+          "total_payment": 3030.30,
+          "ending_balance": 17.81
+        },
+        {
+          "period": 12,
+          "payment_date": "2028-07-10",
+          "starting_balance": 17.81,
+          "interest": 0.80,
+          "principal": 17.01,
+          "total_payment": 17.81,
+          "ending_balance": 0.00
+        }
+      ]
     }
   ]
 }

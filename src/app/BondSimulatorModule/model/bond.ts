@@ -1,5 +1,8 @@
+import {Schedule} from './schedule';
+
 export class Bond {
   id!: number;
+  user_id!: number;
   name!: string;
   issue_date!: string;
   nominal_amount!: number;
@@ -11,4 +14,5 @@ export class Bond {
   total_grace!: number;
   partial_grace!: number;
   initial_cost!: number;
+  schedule!: Schedule[];
 }

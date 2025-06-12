@@ -200,7 +200,7 @@
                title="Periods with no principal or interest payments."></i>
           </div>
           <input pInputText pTooltip="Periods with no principal or interest payments." tooltipPosition="right"
-                 id="total_grace" type="number" formControlName="total_grace" placeholder="Total Grace">
+                 id="total_grace" type="number" formControlName="total_grace" placeholder="Total Grace" >
           @if (!bondForm.controls.total_grace.valid && (bondForm.controls.total_grace.dirty || bondForm.controls.total_grace.touched)) {
             @if (bondForm.controls.total_grace.hasError('required')) {
               <small class="text-red-600">Total Grace is required.</small>

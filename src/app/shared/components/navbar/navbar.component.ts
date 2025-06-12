@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {Toolbar} from 'primeng/toolbar';
 import {Avatar} from 'primeng/avatar';
 import {Menu} from 'primeng/menu';
@@ -10,6 +10,7 @@ import { NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {filter} from 'rxjs';
 import {TitleCasePipe} from '@angular/common';
 import {SidenavComponent} from '../sidenav/sidenav.component';
+import {AuthService} from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -30,8 +31,10 @@ import {SidenavComponent} from '../sidenav/sidenav.component';
 export class NavbarComponent implements OnInit {
   title: string = '';
   visible : boolean = false;
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
-  constructor(private router: Router) {
+  constructor() {
   }
 
   items: MenuItem[] | undefined;
@@ -47,8 +50,9 @@ export class NavbarComponent implements OnInit {
             icon: 'pi pi-refresh'
           },
           {
-            label: 'Export',
-            icon: 'pi pi-upload'
+            label: 'Log Out',
+            icon: 'pi pi-sign-out',
+            command: () => this.logout()
           }
         ]
       }
@@ -68,6 +72,11 @@ export class NavbarComponent implements OnInit {
   hideSidebar(){
     this.visible = false;
   }
+  async logout() {
+    await this.authService.signOut();
+    await this.router.navigate(['/login']);
+  }
+
 
 
 }

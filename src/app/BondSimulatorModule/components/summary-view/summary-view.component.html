@@ -1,0 +1,18 @@
+<div class="flex flex-col h-full align-items-center">
+  <div>
+    <h1 class="text-center text-xl">Summary</h1>
+  </div>
+  <div class="flex flex-col flex-1 h-full gap-6">
+    <div class="flex flex-col gap-2">
+      <span class="font-bold pl-3">Total Interest : {{totalInterest}}</span>
+      <span class="font-bold pl-3">Total Amortization : {{totalAmortization}}</span>
+      <span class="font-bold pl-3">Total Payment : {{totalPayment}}</span>
+    </div>
+    <div class="flex flex-col lg:flex-row">
+      <canvas #doughnutCanvas class="w-20rem h-20rem"></canvas>
+    </div>
+    <div >
+      <canvas #lineChartCanvas class="w-20rem h-20rem"></canvas>
+    </div>
+  </div>
+</div>
