@@ -1,0 +1,14 @@
+<p-dialog
+  header="Cash Flow"
+  [resizable]="false"
+  [modal]="true"
+  [(visible)]="dialogVisible"
+  [style]="{ width: '75vw' }"
+  [contentStyle]="{ height: '75vh' }"
+  (onHide)="toggleDialog()"
+>
+  <app-flow-table-item
+    [schedule]="schedule"
+    [bondName]="bondName"
+  ></app-flow-table-item>
+</p-dialog>
