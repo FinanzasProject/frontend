@@ -5,9 +5,13 @@
 @plugin "tailwindcss-primeui";
 @custom-variant dark (&:where(.p-dark, .p-dark *));
 
-
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   font-family: "Roboto", sans-serif;
+}
+
+.global-toast {
+  z-index: 20000 !important;
 }

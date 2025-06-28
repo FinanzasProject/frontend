@@ -1,6 +1,12 @@
+<p-toast
+  position="bottom-right"
+  appendTo="body"
+  [baseZIndex]="10000"
+  styleClass="global-toast"
+>
+</p-toast>
 @if (hideToolbarRoutes()){
-  <app-navbar></app-navbar>
+<app-navbar></app-navbar>
 }
+
 <router-outlet></router-outlet>
-
-

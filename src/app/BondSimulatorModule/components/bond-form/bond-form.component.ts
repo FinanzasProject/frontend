@@ -18,6 +18,7 @@ import { Ripple } from 'primeng/ripple';
 import { StyleClassModule } from 'primeng/styleclass';
 import { Schedule } from '../../model/schedule';
 import { ScheduleTableDialogComponent } from '../schedule-table-dialog/schedule-table-dialog.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-bond-form',
@@ -42,6 +43,7 @@ export class BondFormComponent implements OnInit {
   schedule: Schedule[] = [];
   dialogVisible: boolean = false;
 
+  private messageService = inject(MessageService);
   rateType: any[] | undefined;
   paymentFrequency: any[] | undefined;
   amortization_method: any[] | undefined;
@@ -230,6 +232,12 @@ export class BondFormComponent implements OnInit {
   generateSchedule() {
     this.schedule = this.generateFrenchSchedule();
     this.showDialog();
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Schedule generated successfully',
+      life: 3000,
+    });
   }
 
   resetForm() {
