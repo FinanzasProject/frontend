@@ -231,17 +231,32 @@ export class BondFormComponent implements OnInit {
 
   generateSchedule() {
     this.schedule = this.generateFrenchSchedule();
-    this.showDialog();
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'Schedule generated successfully',
-      life: 3000,
-    });
+    if (this.schedule.length > 0) {
+      this.showDialog();
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Schedule generated successfully',
+        life: 3000,
+      });
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Schedule generation failed',
+        life: 3000,
+      });
+    }
   }
 
   resetForm() {
     this.bondForm.reset();
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Info',
+      detail: 'Form reset successfully',
+      life: 3000,
+    });
   }
 
   showDialog() {
