@@ -52,7 +52,6 @@
         type="number"
         formControlName="nominal_amount"
         placeholder="Nominal Amount"
-        required
       ></p-input-number>
       @if (!bondForm.controls.nominal_amount.valid &&
       (bondForm.controls.nominal_amount.dirty ||
@@ -82,7 +81,8 @@
         id="rate_type"
         formControlName="rate_type"
         [options]="rateType"
-        optionLabel="name"
+        optionLabel="label"
+        optionValue="name"
         placeholder="Select a Rate"
       />
     </div>
@@ -106,7 +106,8 @@
         id="capitalization_period"
         formControlName="capitalization_period"
         [options]="capitalizationOptions"
-        optionLabel="name"
+        optionLabel="label"
+        optionValue="name"
         placeholder="Select Period"
       >
       </p-select>
@@ -162,7 +163,8 @@
         id="amortization_method"
         formControlName="amortization_method"
         [options]="amortization_method"
-        optionLabel="name"
+        optionLabel="label"
+        optionValue="name"
         placeholder="Select Amortization"
       />
     </div>
@@ -288,7 +290,6 @@
             type="number"
             formControlName="initial_cost"
             placeholder="Initial Cost"
-            required
           />
           @if (!bondForm.controls.initial_cost.valid &&
           (bondForm.controls.initial_cost.dirty ||
@@ -371,8 +372,7 @@
 <div class="flex justify-end p-5">
   <p-button-group>
     <p-button severity="danger" (onClick)="resetForm()"> Reset Form</p-button>
-    <p-button severity="success"> Save Bond</p-button>
-    <p-button severity="info" (onClick)="generateSchedule()">
+    <p-button severity="success" (onClick)="saveForm()">
       Generate Cash Flow</p-button
     >
   </p-button-group>

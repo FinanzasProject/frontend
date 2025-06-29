@@ -19,6 +19,8 @@ import { StyleClassModule } from 'primeng/styleclass';
 import { Schedule } from '../../model/schedule';
 import { ScheduleTableDialogComponent } from '../schedule-table-dialog/schedule-table-dialog.component';
 import { MessageService } from 'primeng/api';
+import { BondsService } from '../../services/bonds.service';
+import { Bond, NewBond } from '../../model/bond';
 
 @Component({
   selector: 'app-bond-form',
@@ -44,11 +46,13 @@ export class BondFormComponent implements OnInit {
   dialogVisible: boolean = false;
 
   private messageService = inject(MessageService);
-  rateType: any[] | undefined;
-  paymentFrequency: any[] | undefined;
-  amortization_method: any[] | undefined;
-  capitalizationOptions: any[] | undefined;
   private formBuilder = inject(FormBuilder);
+  private bondService = inject(BondsService);
+
+  rateType: { label: string; name: string }[] = [];
+  paymentFrequency: { label: string; name: string }[] = [];
+  amortization_method: { label: string; name: string }[] = [];
+  capitalizationOptions: { label: string; name: string }[] = [];
   bondForm = this.formBuilder.group(
     {
       name: new FormControl('', [
@@ -58,8 +62,8 @@ export class BondFormComponent implements OnInit {
         Validators.maxLength(50),
       ]),
       nominal_amount: new FormControl(null, [
-        Validators.required,
         Validators.min(1),
+        Validators.required,
       ]),
       interest_rate: new FormControl(null, [
         Validators.required,
@@ -70,7 +74,7 @@ export class BondFormComponent implements OnInit {
       payment_frequency: new FormControl('', Validators.required),
       amortization_method: new FormControl(''),
       term: new FormControl(null, [Validators.min(1)]),
-      issue_date: new FormControl(null, Validators.required),
+      issue_date: new FormControl<Date | null>(null, Validators.required),
       total_grace: new FormControl(null, [Validators.min(0)]),
       partial_grace: new FormControl(null, [Validators.min(0)]),
       initial_cost: new FormControl(null, [Validators.min(0)]),
@@ -81,7 +85,11 @@ export class BondFormComponent implements OnInit {
   );
   constructor() {}
   ngOnInit(): void {
-    this.rateType = [{ name: 'nominal' }, { name: 'effective' }];
+    this.rateType = [
+      { label: 'Nominal', name: 'nominal' },
+      { label: 'Effective', name: 'effective' },
+    ];
+
     this.paymentFrequency = [
       { label: 'Monthly', name: 'monthly' },
       { label: 'Bimonthly', name: 'bimonthly' },
@@ -89,13 +97,15 @@ export class BondFormComponent implements OnInit {
       { label: 'Semiannual', name: 'semiannual' },
       { label: 'Annual', name: 'annual' },
     ];
-    this.amortization_method = [{ name: 'french' }];
+
+    this.amortization_method = [{ label: 'French', name: 'french' }];
+
     this.capitalizationOptions = [
-      { name: 'monthly' },
-      { name: 'bimonthly' },
-      { name: 'quarterly' },
-      { name: 'semiannual' },
-      { name: 'annual' },
+      { label: 'Monthly', name: 'monthly' },
+      { label: 'Bimonthly', name: 'bimonthly' },
+      { label: 'Quarterly', name: 'quarterly' },
+      { label: 'Semiannual', name: 'semiannual' },
+      { label: 'Annual', name: 'annual' },
     ];
   }
 
@@ -110,15 +120,7 @@ export class BondFormComponent implements OnInit {
     return null;
   }
 
-  generateFrenchSchedule(): Array<{
-    period: number;
-    payment_date: string;
-    starting_balance: number;
-    interest: number;
-    principal: number;
-    total_payment: number;
-    ending_balance: number;
-  }> {
+  generateFrenchSchedule(): Array<Schedule> {
     // 1) extraigo y valido datos
     const val = this.bondForm.value as {
       nominal_amount: number | null;
@@ -247,6 +249,54 @@ export class BondFormComponent implements OnInit {
         life: 3000,
       });
     }
+  }
+  saveForm() {
+    if (this.bondForm.invalid) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Invalid Bond',
+        detail: 'Bond form invalid',
+        life: 3000,
+      });
+      return;
+    }
+    this.createBond();
+  }
+  async createBond() {
+    const fv = this.bondForm.value;
+
+    const raw = fv.issue_date as Date;
+    if (!raw) throw new Error('Issue date es obligatorio');
+
+    const issue_date = raw.toISOString().split('T')[0];
+
+    let newBond: NewBond = {
+      name: fv.name!,
+      issue_date: issue_date,
+      nominal_amount: fv.nominal_amount!,
+      interest_rate: fv.interest_rate!,
+      rate_type: fv.rate_type!,
+      rate_period: fv.capitalization_period!,
+      payment_frequency: fv.payment_frequency!,
+      amortization_method: fv.amortization_method!,
+      term: fv.term!,
+      total_grace: fv.total_grace!,
+      partial_grace: fv.partial_grace!,
+      initial_cost: fv.initial_cost!,
+      schedule: this.generateFrenchSchedule(),
+    };
+    this.schedule = this.generateFrenchSchedule();
+    this.bondService.createBond(newBond).then((bond) => {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Bond created successfully',
+        life: 3000,
+      });
+      this.resetForm();
+
+      this.showDialog();
+    });
   }
 
   resetForm() {
