@@ -58,4 +58,28 @@ export class BondsService {
     );
     return inserted[0];
   }
+
+  async deleteBond(id: number): Promise<void> {
+    const { data: sessionData, error } = await this.auth.getSession();
+    if (error) {
+      throw new Error('Error recuperando la sesion:' + error.message);
+    }
+    const token = sessionData.session?.access_token;
+    if (!token) {
+      throw new Error('No hay token de acceso. Inicia sesión primero');
+    }
+
+    const headers = new HttpHeaders({
+      apikey: environment.apiKey,
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Prefer: 'return=representation',
+    });
+    const params = new HttpParams().set('id', 'eq.' + id);
+
+    await firstValueFrom(
+      this.http.delete<void>(this.ENDPOINT, { headers, params })
+    );
+  }
 }

@@ -1,0 +1,9 @@
+.login-container {
+  height: 100vh;
+  background-image: url("/src/app/shared/assets/image.png");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

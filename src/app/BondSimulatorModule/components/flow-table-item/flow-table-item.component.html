@@ -1,32 +1,44 @@
-<p-table #dt
-         [columns]="cols"
-         [value]="schedule"
-         [exportFilename]="bondName"
-         [exportHeader]="'customExportHeader'"
-         stripedRows>
+<p-table
+  #dt
+  [columns]="cols"
+  [value]="schedule"
+  [exportFilename]="bondName"
+  [exportHeader]="'customExportHeader'"
+  stripedRows
+>
   <ng-template #caption>
-    <div class="text-end pb-4">
-      <p-button icon="pi pi-external-link" label="Export" (click)="dt.exportCSV()"/>
+    <div class="flex gap-2 justify-end pb-4">
+      <p-button
+        icon="pi pi-external-link"
+        label="Export"
+        (click)="dt.exportCSV()"
+      />
+      @if (!isHistoricalRoute) {
+      <p-button
+        icon="pi pi-trash"
+        label="Delete"
+        severity="danger"
+        (click)="onDeleteEvent()"
+      />
+      }
     </div>
   </ng-template>
   <ng-template #header let-columns>
     <tr>
       @for (col of columns; track col.field) {
-        <th>
-          {{ col.header }}
-        </th>
+      <th>
+        {{ col.header }}
+      </th>
       }
     </tr>
   </ng-template>
   <ng-template #body let-rowData let-columns="columns">
     <tr>
       @for (col of columns; track col.field) {
-        <td>
-          {{ rowData[col.field] }}
-        </td>
+      <td>
+        {{ rowData[col.field] }}
+      </td>
       }
     </tr>
   </ng-template>
-
 </p-table>
-

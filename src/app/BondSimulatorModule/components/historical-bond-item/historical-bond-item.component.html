@@ -7,20 +7,21 @@
   leaveActiveClass="animate-slideup"
   class="flex p-4 mr-3 gap-1 cursor-pointer rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple"
 >
-  <span class="font-medium">{{ bond?.name }}</span>
+  <span class="font-medium">{{ bond.name }}</span>
   <i class="pi pi-chevron-down"></i>
 </div>
 <div class="hidden p-0 mr-3 overflow-hidden">
   <div class="flex flex-col lg:flex-row">
     <div class="flex-1">
-      <app-flow-table-item  [schedule]="bond.schedule || []" [bondName]="bond.name">
-
+      <app-flow-table-item
+        [schedule]="bond.schedule || []"
+        [bondName]="bond.name"
+        (onDelete)="onDeleteEvent(bond.id)"
+      >
       </app-flow-table-item>
     </div>
     <div class="w-1/3">
       <app-summary-view [schedule]="bond.schedule || []"></app-summary-view>
     </div>
   </div>
-
-
 </div>

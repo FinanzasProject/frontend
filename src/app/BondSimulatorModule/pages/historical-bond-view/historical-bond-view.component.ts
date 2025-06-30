@@ -26,4 +26,8 @@ export class HistoricalBondViewComponent implements OnInit {
       console.error(err);
     }
   }
+
+  onDeleteBond(id: number) {
+    this.bondService.deleteBond(id).then(() => this.loadBonds());
+  }
 }

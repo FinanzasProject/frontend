@@ -1,8 +1,6 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <p-card header="Login" [style]="{ width: '360px' }">
-    <ng-template #header>
-
-    </ng-template>
+    <ng-template #header> </ng-template>
     <ng-template #title>
       <h1 class="text-center">Register</h1>
     </ng-template>
@@ -10,40 +8,64 @@
     <div class="field">
       <p-ifta-label>
         <p-icon-field>
-          <p-inputicon class="pi pi-at"/>
-          <input class="w-full" pInputText id="email" formControlName="email" placeholder="Type your email">
+          <p-inputicon class="pi pi-at" />
+          <input
+            class="w-full"
+            pInputText
+            id="email"
+            formControlName="email"
+            placeholder="Type your email"
+          />
         </p-icon-field>
         <label for="email">Email</label>
       </p-ifta-label>
-      @if (registerForm.controls.email.invalid && (registerForm.controls.email.dirty || registerForm.controls.email.touched)) {
-        @if (registerForm.controls.email.hasError('required')) {
-          <small class="text-red-600">Email is required</small>
-        } @else if (registerForm.controls.email.hasError('email')){
-          <small class="text-red-600">Email is not valid</small>
-        }
-      }
+      @if (registerForm.controls.email.invalid &&
+      (registerForm.controls.email.dirty ||
+      registerForm.controls.email.touched)) { @if
+      (registerForm.controls.email.hasError('required')) {
+      <small class="text-red-600">Email is required</small>
+      } @else if (registerForm.controls.email.hasError('email')){
+      <small class="text-red-600">Email is not valid</small>
+      } }
     </div>
 
     <div class="field">
       <p-ifta-label>
         <p-icon-field>
-          <p-inputicon class="pi pi-lock"/>
-          <input pInputText class="w-full" id="password" type="password" formControlName="password" placeholder="Password">
+          <p-inputicon class="pi pi-lock" />
+          <input
+            pInputText
+            class="w-full"
+            id="password"
+            type="password"
+            formControlName="password"
+            placeholder="Password"
+          />
         </p-icon-field>
         <label for="password">Password</label>
       </p-ifta-label>
-      @if (registerForm.controls.password.invalid && (registerForm.controls.password.dirty || registerForm.controls.password.touched)) {
-        @if (registerForm.controls.email.hasError('required')) {
-          <small class="text-red-600">Password is required</small>
-        }
-      }
+      @if (registerForm.controls.password.invalid &&
+      (registerForm.controls.password.dirty ||
+      registerForm.controls.password.touched)) { @if
+      (registerForm.controls.password.hasError('required')) {
+      <small class="text-red-600">Password is required</small>
+      } }
     </div>
 
-
     <ng-template #footer>
-      <button pButton pRipple class="w-full" severity="success" [disabled]="registerForm.invalid" type="submit" >
+      <button
+        pButton
+        pRipple
+        class="w-full"
+        severity="success"
+        [disabled]="registerForm.invalid"
+        type="submit"
+      >
         <span pButtonLabel>Sign In</span>
       </button>
+      <div class="mt-2">
+        Already have an account? <a routerLink="/login">Login</a>
+      </div>
     </ng-template>
   </p-card>
 </form>
